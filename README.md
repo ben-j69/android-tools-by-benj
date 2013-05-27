@@ -1,4 +1,4 @@
-tools-for-Android-by-benj
+Tools for Android by Ben-J
 =========================
 
 Tools for Android developpment
