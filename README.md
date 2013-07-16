@@ -27,3 +27,6 @@ Format a number with at most 2 digits after the dot or coma:
 
 Check if a string is a number:
 - public static boolean isNumeric(String str)
+
+Check if a string is a valid email address
+- public final static boolean isValidEmail(CharSequence target) {
