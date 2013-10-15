@@ -29,4 +29,8 @@ Check if a string is a number:
 - public static boolean isNumeric(String str)
 
 Check if a string is a valid email address
-- public final static boolean isValidEmail(CharSequence target) {
+- public final static boolean isValidEmail(CharSequence target)
+
+Convert seconds to minutes:seconds display
+- public static String secondsToMinutes(int seconds)
+

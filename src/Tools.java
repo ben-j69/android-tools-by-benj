@@ -116,6 +116,8 @@ public class Tools {
 	}
 
 	public static String format(Object object) {
+        if (object == null)
+			return "0";
 		NumberFormat nf = NumberFormat.getInstance();
 		nf.setMinimumFractionDigits(0);
 		return nf.format(object);
@@ -136,5 +138,11 @@ public class Tools {
 	    } else {
 	        return android.util.Patterns.EMAIL_ADDRESS.matcher(target).matches();
 	    }
+	}
+    
+    public static String secondsToMinutes(int seconds) {
+		int reste = seconds % 60;
+		int minutes = (seconds - reste) / 60;
+		return minutes + ":" + (reste < 10 ? "0" : "") + reste;
 	}
 }
