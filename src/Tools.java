@@ -74,27 +74,20 @@ public class Tools {
 			return Base64.encodeToString(sha256_HMAC.doFinal(data.getBytes()),
 					0);
 		} catch (NoSuchAlgorithmException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (InvalidKeyException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return "error";
-
 	}
-
+	
+	// Base 64
 	public static String encodeBase64(String data) {
 		return Base64.encodeToString(data.getBytes(), 0);
 	}
 
-	public static String encodeURL(String url) {
-		url = url.replace("\n", "");
-		url = url.replace("+", "%2B");
-		url = url.replace(" ", "%20");
-		return url;
-	}
 
+	//MD5
 	public static String toMD5(String in) {
 		MessageDigest digest;
 		try {
@@ -113,6 +106,14 @@ public class Tools {
 			e.printStackTrace();
 		}
 		return null;
+	}
+	
+	// URL
+	public static String encodeURL(String url) {
+		url = url.replace("\n", "");
+		url = url.replace("+", "%2B");
+		url = url.replace(" ", "%20");
+		return url;
 	}
 
 	public static String format(Object object) {
@@ -145,4 +146,86 @@ public class Tools {
 		int minutes = (seconds - reste) / 60;
 		return minutes + ":" + (reste < 10 ? "0" : "") + reste;
 	}
+    
+    public static Bitmap scaleDownBitmap(Bitmap photo, int newHeight,
+			Context context) {
+
+		final float densityMultiplier = context.getResources()
+				.getDisplayMetrics().density;
+
+		int h = (int) (newHeight * densityMultiplier);
+		int w = (int) (h * photo.getWidth() / ((double) photo.getHeight()));
+
+		photo = Bitmap.createScaledBitmap(photo, w, h, true);
+
+		return photo;
+	}
+    
+    public static String rot13(String input) {
+		StringBuilder sb = new StringBuilder();
+		for (int i = 0; i < input.length(); i++) {
+			char c = input.charAt(i);
+			if (c >= 'a' && c <= 'm')
+				c += 13;
+			else if (c >= 'A' && c <= 'M')
+				c += 13;
+			else if (c >= 'n' && c <= 'z')
+				c -= 13;
+			else if (c >= 'N' && c <= 'Z')
+				c -= 13;
+			sb.append(c);
+		}
+		return sb.toString();
+	}
+    
+	public static int randInt(int min, int max) {
+		Random rand = new Random();
+		int randomNum = rand.nextInt((max - min) + 1) + min;
+		return randomNum;
+	}
+	
+	public final static boolean isValidEmail(CharSequence target) {
+		if (target == null) {
+			return false;
+		} else {
+			return android.util.Patterns.EMAIL_ADDRESS.matcher(target)
+					.matches();
+		}
+	}
+	
+	public static String toMD5(String in) {
+		MessageDigest digest;
+		try {
+			digest = MessageDigest.getInstance("MD5");
+			digest.reset();
+			digest.update(in.getBytes());
+			byte[] a = digest.digest();
+			int len = a.length;
+			StringBuilder sb = new StringBuilder(len << 1);
+			for (int i = 0; i < len; i++) {
+				sb.append(Character.forDigit((a[i] & 0xf0) >> 4, 16));
+				sb.append(Character.forDigit(a[i] & 0x0f, 16));
+			}
+			return sb.toString();
+		} catch (NoSuchAlgorithmException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	public static String format(Object object) {
+		NumberFormat nf = NumberFormat.getInstance();
+		nf.setMinimumFractionDigits(0);
+		return nf.format(object);
+	}
+
+	public static boolean isNumeric(String str) {
+		try {
+			Double.parseDouble(str);
+		} catch (NumberFormatException nfe) {
+			return false;
+		}
+		return true;
+	}
+	
 }
