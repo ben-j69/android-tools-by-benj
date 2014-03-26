@@ -1,5 +1,5 @@
 /* Created by Ben-J*/
-package com.balinea.classes;
+package com.ben.tools;
 
 import java.security.InvalidKeyException;
 import java.security.MessageDigest;
