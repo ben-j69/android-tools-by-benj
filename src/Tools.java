@@ -9,12 +9,6 @@ import java.text.NumberFormat;
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
 
-import com.balinea.CreateAccountActivity;
-import com.balinea.MyBalineaActivity;
-import com.balinea.R;
-import com.balinea.R.bool;
-import com.balinea.R.string;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
@@ -183,49 +177,4 @@ public class Tools {
 		int randomNum = rand.nextInt((max - min) + 1) + min;
 		return randomNum;
 	}
-	
-	public final static boolean isValidEmail(CharSequence target) {
-		if (target == null) {
-			return false;
-		} else {
-			return android.util.Patterns.EMAIL_ADDRESS.matcher(target)
-					.matches();
-		}
-	}
-	
-	public static String toMD5(String in) {
-		MessageDigest digest;
-		try {
-			digest = MessageDigest.getInstance("MD5");
-			digest.reset();
-			digest.update(in.getBytes());
-			byte[] a = digest.digest();
-			int len = a.length;
-			StringBuilder sb = new StringBuilder(len << 1);
-			for (int i = 0; i < len; i++) {
-				sb.append(Character.forDigit((a[i] & 0xf0) >> 4, 16));
-				sb.append(Character.forDigit(a[i] & 0x0f, 16));
-			}
-			return sb.toString();
-		} catch (NoSuchAlgorithmException e) {
-			e.printStackTrace();
-		}
-		return null;
-	}
-
-	public static String format(Object object) {
-		NumberFormat nf = NumberFormat.getInstance();
-		nf.setMinimumFractionDigits(0);
-		return nf.format(object);
-	}
-
-	public static boolean isNumeric(String str) {
-		try {
-			Double.parseDouble(str);
-		} catch (NumberFormatException nfe) {
-			return false;
-		}
-		return true;
-	}
-	
 }
